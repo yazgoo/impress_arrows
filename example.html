@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>impress_arrows</title>
+        <meta http-equiv="Content-Type"
+        content="text/html; charset=UTF-8">
+        <link rel="stylesheet" type="text/css"
+        href="impress_arrows.css"/>
+    </head>
+    <body>
+        <div id="impress">
+            <div id="status" class="step title" data-x="700"
+                data-y="400" data-scale="0.4">impress_arrows</div>
+            <div id="html" class="step" data-x="800"
+                data-y="800">
+                <div class="process box">create html</div>
+            </div>
+            <div class="arrow" data-x="450"></div>
+            <div id="dependencies" class="step" data-x="0"
+                data-y="800">
+                <div class="process box">include dependencies</div>
+            </div>
+            <div class="arrow" data-y="500"></div>
+            <div id="cstep" class="step process box"
+                data-x="0" data-y="0">
+                Create step
+                <div class="lib box green">with descriptions</div>
+                <div class="lib box salmon">or boxes</div>
+            </div>
+            <div class="arrow" data-x="490"></div>
+            <div id="carrow" class="step" data-x="800"
+                data-y="0">
+                <div class="process box">Create arrow</div>
+            </div>
+            <div class="arrow" data-rotate="-60"></div>
+            <div id="so-on" class="step" data-x="1600"
+                data-y="400">
+                <div class="process box">And so on...</div>
+            </div>
+            <div id="done" class="step" data-x="700"
+                data-y="300" data-scale="2.5"></div>
+        </div>
+        <div id="descriptions">
+            <div class="html_description">
+                First, create an HTML file.
+                It could be based on the file you're watching now.
+            </div>
+            <div class="dependencies_description">
+                Your file should include:
+                <ul>
+                    <li>impress_arrows.css in the header</li>
+                    <li>jquery before body end tag</li>
+                    <li>then impress_arrows.js</li>
+                    <li>then impress.js</li>
+                </ul>
+            </div>
+            <div class="cstep_description">
+                Under a div with an ID of "impress"
+                Create a step as you would with impress.js.
+                Lets say the step as an ID of "yourid"<br/>
+                If you need a description
+                (what you are reading now),
+                under a div with an ID of "descriptions",
+                create a div with a class named
+                "yourid_description".<br/>
+                You can also include boxes in your step.
+            </div>
+            <div class="carrow_description">
+                Before you write your next step as you normally
+                would, just include an empty div of class "arrow".
+                <br/>
+                This will draw the arrow.<br/>
+            </div>
+            <div class="so-on_description">
+                If the default arrow is not well positioned,
+                you can use standard impress.js attributes like:
+                data-x, data-y, data-rotate
+            </div>
+        </div>
+        <script type="text/javascript" src="jquery-1.11.0.min.js">
+        </script>
+        <script type="text/javascript" src="impress_arrows.js">
+        </script>
+        <script type="text/javascript" src="impress.js"></script>
+        <script>impress().init();</script>
+    </body>
+</html>

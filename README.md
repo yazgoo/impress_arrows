@@ -1,1 +1,1 @@
-[Examples](http://rawgit.com/yazgoo/impress_arrow/master/index.html)
+[Examples](http://cdn.rawgit.com/yazgoo/impress_arrow/master/index.html)

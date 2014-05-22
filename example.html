@@ -11,34 +11,26 @@
         <div id="impress">
             <div id="status" class="step title" data-x="700"
                 data-y="400" data-scale="0.4">impress_arrows</div>
-            <div id="html" class="step" data-x="800"
-                data-y="800">
-                <div class="process box">create html</div>
-            </div>
-            <div class="arrow" data-x="450"></div>
-            <div id="dependencies" class="step" data-x="0"
-                data-y="800">
-                <div class="process box">include dependencies</div>
-            </div>
+            <div id="html" class="step box" data-x="800"
+                data-y="800">create html</div>
+            <div class="arrow" data-x="460"></div>
+            <div id="dependencies" class="step box" data-x="0"
+                data-y="800">include dependencies</div>
             <div class="arrow" data-y="500"></div>
-            <div id="cstep" class="step process box"
+            <div id="cstep" class="step box"
                 data-x="0" data-y="0">
                 Create step
-                <div class="lib box green">with descriptions</div>
-                <div class="lib box salmon">or boxes</div>
+                <div class="box green">with descriptions</div>
+                <div class="box salmon">or boxes</div>
             </div>
             <div class="arrow" data-x="490"></div>
-            <div id="carrow" class="step" data-x="800"
-                data-y="0">
-                <div class="process box">Create arrow</div>
-            </div>
-            <div class="arrow" data-rotate="-60"></div>
-            <div id="so-on" class="step" data-x="1600"
-                data-y="400">
-                <div class="process box">And so on...</div>
-            </div>
+            <div id="carrow" class="step box" data-x="800"
+                data-y="0">Create arrow</div>
+            <div class="arrow"></div>
+            <div id="so-on" class="step box" data-x="1600"
+                data-y="400">And so on...</div>
             <div id="done" class="step" data-x="700"
-                data-y="300" data-scale="2.5"></div>
+                data-y="300" data-scale="2"></div>
         </div>
         <div id="descriptions">
             <div class="html_description">
@@ -82,6 +74,9 @@
         <script type="text/javascript" src="impress_arrows.js">
         </script>
         <script type="text/javascript" src="impress.js"></script>
-        <script>impress().init();</script>
+        <script>
+impress_arrows().init();
+impress().init();
+        </script>
     </body>
 </html>

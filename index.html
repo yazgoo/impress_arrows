@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<head>
+        <meta http-equiv="Content-Type"
+        content="text/html; charset=UTF-8">
+        <style>
+body
+{
+    font-family: 'PT Sans', sans-serif;
+}
+        </style>
+</head>
+<body>
+<h2>impress_arrows</h2>
+<p>
+impress_arrows allows you to draw graphs with HTML.
+<br/>
+These graphs are interactive thanks to impress.js power.
+</p>
+<h3>Example #1</h3>
+<p>
+Here is an example which happens
+to give details on impress_arrows workflow:
+<br/>
+<img src=arrow://example.html#/done width=500 height=300 />
+</p>
+<h3>Example #2</h3>
+<p>
+Here is a real life example describing how fuse library works:
+<br/>
+<img src=arrow://fuse.html#/done
+width=450 height=300 title=fuse />
+</p>
+<script type="text/javascript" src="jquery-1.11.0.min.js">
+</script>
+<script type="text/javascript" src="impress_arrows.js">
+</script>
+<script>
+impress_arrows().load_images();
+</script>
+</body>

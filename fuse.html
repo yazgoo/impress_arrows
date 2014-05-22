@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>An overview of how fuse filesystem works</title>
+        <meta http-equiv="Content-Type"
+        content="text/html; charset=UTF-8">
+        <link rel="stylesheet" type="text/css"
+        href="impress_arrows.css"/>
+<style>
+.kernel {
+    width: 10000px;
+    height: 1000px;
+    top: 500px;
+    left: -400px;
+    opacity: 0.7;
+}
+.spinner {
+    position: relative;
+    top: -165px;
+    left: -180px;
+}
+#driver_process2.future {
+    opacity: 0;
+}
+#driver_process2.past {
+    opacity: 0;
+}
+</style>
+    </head>
+    <body>
+        <div id="impress">
+            <div id="driver_process" class="step process box"
+                data-x="0" data-y="0">
+                Fuse Driver process
+                <div class="lib box green">libfuse</div>
+                <div class="lib box salmon">glib</div>
+            </div>
+            <div class="arrow"></div>
+            <div id="fusermount_process" class="step" data-x="800"
+                data-y="0">
+                <div class="process box">fusermount</div>
+            </div>
+            <div class="step kernel box skip"
+                data-x="800" data-y="500">
+                Kernel land
+            </div>
+            <div class="arrow" data-x="794"></div>
+            <div id="fuse" class="step box green" data-x="800"
+                data-y="800">
+                FUSE driver
+            </div>
+            <div class="arrow"></div>
+            <div class="step box blue long" data-x="1400"
+                data-y="450" id="sys">
+                /sys/class/misc/fuse
+            </div>
+            <div class="step box blue" data-x="2000" data-y="450"
+                id="proc">
+                /proc/misc
+            </div>
+            <div class="arrow"></div>
+            <div class="step process box" data-x="1600" data-y="0"
+                id="udev">
+                udev
+            </div>
+            <div class="arrow"></div>
+            <div class="step box yellow" data-x="800"
+                data-y="450" id="dev_fuse">
+                /dev/fuse
+            </div>
+            <div class="arrow"></div>
+            <div class="step" data-x="800" data-y="0"
+                id="fusermount2"></div>
+            <div class="arrow"></div>
+            <div class="step box green long large"
+                data-x="0" data-y="800" id="vfs">
+                VFS
+            </div>
+            <div class="step process long box"
+                data-x="-600" data-y="0" id="ls">
+                    ls -l /mountpoint/file
+                    <div class="lib box salmon">glib</div>
+            </div>
+            <div class="arrow"></div>
+            <div class="step" data-x="0" data-y="800"
+                id="vfs2"></div>
+            <div class="arrow"></div>
+            <div class="step" data-x="800" data-y="800"
+                id="fuse2"></div>
+            <div class="arrow"></div>
+            <div class="step" data-x="800" data-y="450"
+                id="dev_fuse2"></div>
+            <div class="arrow"></div>
+            <div class="step" data-x="0" data-y="0"
+                id="driver_process2">
+                <img src="spinner.gif" class="spinner"/>
+            </div>
+            <div class="arrow"></div>
+            <div class="step" data-x="800" data-y="450"
+                id="dev_fuse3"></div>
+            <div class="arrow" data-x="794"></div>
+            <div class="step" data-x="800" data-y="800"
+                id="fuse3"></div>
+            <div class="arrow"></div>
+            <div class="step" data-x="0" data-y="800"></div>
+            <div class="arrow"></div>
+            <div class="step" data-x="-600" data-y="0"
+                id="ls2"></div>
+            <div id="done" class="step" data-x="700" data-y="300"
+                data-scale="2.8"></div>
+        </div>
+        <div id="descriptions">
+            <div class="driver_process_description">
+                <li>FUSE allows to write file systems
+                which are processes running in userspace.</li>
+                <li>A fuse process is launched with a mountpoint
+                as argument: it is the root path where the FS
+                will be available. Let's say its /mountpoint here
+                </li>
+                <li>When launched, the process will fork
+                fusermount program via libfuse</li>
+            </div>
+            <div class="fusermount_process_description">
+                <li>fusermount is owned by root with setuid bit</li>
+                <li>The first thing fusermount does is ensure FUSE
+                driver is in the kernel: lets say its not</li>
+            </div>
+            <div class="fuse_description">
+                <li>FUSE driver is inserted</li>
+                <li>FUSE filesystem is declared in the VFS</li>
+                <li>A misc block device is registered</li>
+            </div>
+            <div class="sys_description">
+                a file appears in /sys to notify there's a new 
+                block device
+            </div>
+            <div class="proc_description">
+                /proc/misc now contains the minor number for this device.
+                <br/>The major's is misc's (10)
+            </div>
+            <div class="udev_description">
+                Since a new block device appeared in /sys, udev creates
+                /dev/fuse (mknod based on misc's major and fuse minor)
+            </div>
+            <div class="fusermount2_description">
+                /dev/fuse is available. fusermount can now:
+                <li>Open /dev/fuse and send its fd to the 
+                file system process for it
+                to comunicate with FUSE driver</li>
+                <li>mount -t fuse /dev/fuse /mountpoint</li>
+            </div>
+            <div class="vfs_description">
+                After this mount, VFS associates /mountpoint with
+                FUSE filesystem.
+                The filesystem in user space can now be used.
+            </div>
+            <div class="ls_description">
+                Let's say we launch an ls command on a file managed by
+                FUSE.
+            </div>
+            <div class="vfs2_description">
+                This will issue a stat syscall to the VFS.
+            </div>
+            <div class="fuse2_description">
+                Which will in turn call the stat implementation
+                from fuse.<br/>
+                This implementation will call request_send(),
+                which will add the request to the list
+                of request structure.
+            </div>
+            <div class="dev_fuse2_description">
+                <li>the FS in userspace process, via libfuse,
+                reads /dev/fuse.
+                The FUSE in kernel driver callback fuse_dev_read()
+                is called.</li>
+                <li>The callback returns commands from the list 
+                of request to libfuse</li>
+            </div>
+            <div class="driver_process2_description">
+                <li>libfuse calls the the FS in userspace
+                implementation of stat</li>
+                <li>The FS returns its result</li>
+            </div>
+            <div class="dev_fuse3_description">
+                <li>Then libfuse writes the result to /dev/fuse</li>
+            </div>
+            <div class="fuse3_description">
+                <li>This calls fuse_dev_write() which receives
+                the responses and places them in req-&gt;out</li>
+                <li>request_send() unblocks as there is a response.
+                it sends its result to the stat implementation</li>
+            </div>
+            <div class="ls2_description">
+                ls process receives the stats generated
+                by fuse process.
+            </div>
+        </div>
+        <script type="text/javascript" src="jquery-1.11.0.min.js">
+        </script>
+        <script type="text/javascript" src="impress_arrows.js">
+        </script>
+        <script type="text/javascript" src="impress.js"></script>
+        <script>
+impress_arrows().init();
+$("#driver_process").on("impress:stepenter", function(e) {
+            $("#driver_process").nextAll(".arrow").show()
+            $("#udev").nextAll(".arrow").hide()
+            $("#dev_fuse").hide()
+            $("#ls").hide()
+        })
+$("#udev").on("impress:stepenter", function(e) {
+            $("#driver_process").nextAll(".arrow").hide()
+            $("#udev").nextAll(".arrow").show()
+            $("#ls").nextAll(".arrow").hide()
+            $("#dev_fuse").show()
+        })
+$("#ls").on("impress:stepenter", function(e) {
+            $("#ls").show()
+            $("#driver_process").nextAll(".arrow").hide()
+            $("#ls").nextAll(".arrow").show()
+            $("#driver_process2").nextAll(".arrow").hide()
+        })
+$("#driver_process2").on("impress:stepenter", function(e) {
+            $("#ls").nextAll(".arrow").hide()
+            $("#driver_process2").nextAll(".arrow").show()
+        })
+$("#done").on("impress:stepenter", function(e) {
+            $("#ls").prevAll(".arrow").hide()
+            $("#dev_fuse").show()
+            $("#driver_process2").nextAll(".arrow").show()
+            $("#ls").show()
+        })
+impress().init();
+        </script>
+    </body>
+</html>

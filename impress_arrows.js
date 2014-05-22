@@ -57,10 +57,11 @@ function impress_arrows()
             if(!this.className.match(/_description$/)) return;
             id = this.className.split("_description")[0];
             style = document.styleSheets[0]
+            if(style.cssRules != null) {
             len = style.cssRules.length
             style.insertRule('.impress-on-' + id + ' .' + this.className + " { opacity: 1}", len);
         style.insertRule('.impress-enabled .' + this.className + " { display: block}", len);
-        style.insertRule('.' + this.className + " { opacity: 0}", len);
+        style.insertRule('.' + this.className + " { opacity: 0}", len); }
         $(this).addClass('description')
         })
     }

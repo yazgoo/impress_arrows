@@ -2,46 +2,91 @@
 <head>
         <meta http-equiv="Content-Type"
         content="text/html; charset=UTF-8">
+        <link rel="stylesheet" type="text/css"
+        href="impress_arrows.css"/>
         <style>
-body
+.end
 {
-    font-family: 'PT Sans', sans-serif;
+        width: 600px;
+        font-size: 20px;
+        line-height: 30px;
+        text-align: left;
+        margin: 1px;
 }
         </style>
 </head>
 <body>
-<h2>impress_arrows</h2>
-<p>
-impress_arrows allows you to draw graphs with HTML.
-<br/>
-These graphs are interactive thanks to impress.js power.
-</p>
-<h3>Example #0</h3>
-<p>
-Here is a minimal example:
-<br/>
-<img src=arrow://minimal.html#/done width=500 height=200
-title=minimal />
-</p>
-<h3>Example #1</h3>
-<p>
-Here is an example which happens
-to give details on impress_arrows workflow:
-<br/>
-<img src=arrow://example.html#/done width=500 height=300 />
-</p>
-<h3>Example #2</h3>
-<p>
-Here is a real life example describing how fuse library works:
-<br/>
-<img src=arrow://fuse.html#/done
-width=450 height=300 title=fuse />
-</p>
+<div id=impress>
+    <div class="step" data-scale=0.5>
+        <h1>impress_arrows</h1>
+    </div>
+    <div class=arrow></div>
+    <div class="step" data-y=1000 data-scale=0.7>
+impress_arrows allows you to draw graphs with HTML.
+        <br/>
+        <br/>
+These graphs are interactive thanks to impress.js power.
+    </div>
+    <div class=arrow></div>
+    <div class="step" data-x=1000 data-y=1000 data-scale=0.8>
+        <h3>Example #0</h3>
+        <p>
+        Here is a minimal example:
+        <br/>
+        <img src=arrow://minimal.html#/done width=500 height=200
+        title=minimal />
+        </p>
+    </div>
+    <div class=arrow></div>
+    <div class="step" data-y=1000 data-x=2000 data-rotate=-90>
+        <h3>Example #1</h3>
+        <p>
+        Here is an example which happens
+        to give details on impress_arrows workflow:
+        <br/>
+        <img src=arrow://example.html#/done width=500 height=300 />
+        </p>
+    </div>
+    <div class=arrow></div>
+    <div class="step" data-y=0 data-x=1000>
+        <h3>Example #2</h3>
+        <p>
+        Here is a real life example describing how fuse library works:
+        <br/>
+        <img src=arrow://fuse.html#/done
+        width=450 height=300 title=fuse />
+        </p>
+    </div>
+    <div class=arrow></div>
+    <div class="step" data-y=-1200 data-x=1000 data-rotate=-90>
+        <div class="end box">
+        Get impress arrows
+        <ul>
+            <li><a href=impress_arrows_all.js
+                >self contained</a> (with dependencies 
+                (jquery, impress js))</li>
+                <li>as separates files<ul>
+                    <li>main: <a href=impress_arrows.css>css</a>,
+                    <a href=impress_arrows.js>javascript</a></li>
+                    <li>dependencies:
+                        <a href=jquery-1.11.0.min.js>jquery</a>,
+                        <a href=impress.js>impress</a>
+                    </li>
+                </ul></li>
+        </ul>
+        </div>
+        <a href="https://github.com/yazgoo/impress_arrow"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/365986a132ccd6a44c23a9169022c0b5c890c387/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f7265645f6161303030302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png"></a>
+    </div>
+</div>
 <script type="text/javascript" src="jquery-1.11.0.min.js">
 </script>
 <script type="text/javascript" src="impress_arrows.js">
 </script>
+<script type="text/javascript" src="impress.js"></script>
 <script>
-impress_arrows().load_images();
+var arrows = impress_arrows();
+arrows.init();
+arrows.load_images();
+impress().init();
 </script>
 </body>

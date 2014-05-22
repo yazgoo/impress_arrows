@@ -898,7 +898,109 @@ return this;
 //
 // I've learnt a lot when building impress.js and I hope this code and comments
 // will help somebody learn at least some part of it.
-$("head").append("<link rel=stylesheet type=text/css"
-        + " href=impress_arrows.css/>")
+$("head").append("<style>"
++'body {\
+    font-family: "PT Sans", sans-serif;\
+    min-height: 740px;\
+\
+    background: rgb(215, 215, 215);\
+    background: -webkit-gradient(radial, 50% 50%, 0, 50% 50%, 500, from(rgb(240, 240, 240)), to(rgb(190, 190, 190)));\
+    background: -webkit-radial-gradient(rgb(240, 240, 240), rgb(190, 190, 190));\
+    background: -moz-radial-gradient(rgb(240, 240, 240), rgb(190, 190, 190));\
+    background: -ms-radial-gradient(rgb(240, 240, 240), rgb(190, 190, 190));\
+    background: -o-radial-gradient(rgb(240, 240, 240), rgb(190, 190, 190));\
+    background: radial-gradient(rgb(240, 240, 240), rgb(190, 190, 190));\
+}\
+.title {\
+    color: rgb(102, 102, 102);\
+    font-size: 120px;\
+    text-shadow: 0 2px 2px rgba(0, 0, 0, .1);\
+    font-family: "Open Sans", Arial, sans-serif;\
+}\
+.box {\
+    background-color: white;\
+    border: 1px solid rgba(0, 0, 0, .3);\
+    border-radius: 10px;\
+    box-shadow: 0 2px 6px rgba(0, 0, 0, .1);\
+    color: rgb(102, 102, 102);\
+    text-shadow: 0 2px 2px rgba(0, 0, 0, .1);\
+    font-family: "Open Sans", Arial, sans-serif;\
+    font-size: 60px;\
+    line-height: 50px;\
+    letter-spacing: -1px;\
+    padding: 40px 60px;\
+    margin: 20px;\
+    text-align: center;\
+    position: relative;\
+}\
+.green {\
+    background-color: #daf6bf;\
+}\
+.salmon {\
+    background-color: #ffdbb6;\
+}\
+.blue {\
+    background-color: #d5ebff;\
+}\
+.yellow {\
+    background-color: #f7ff7f;\
+}\
+.arrow.future {\
+    opacity: 1;\
+}\
+.present {\
+    opacity: 1;\
+    transition: opacity .1s ease-in-out;\
+    -moz-transition: opacity .1s ease-in-out;\
+    -webkit-transition: opacity .1s ease-in-out;\
+}\
+.past {\
+    opacity: 1;\
+}\
+.comment.future {\
+    opacity: 0;\
+}\
+.comment.present {\
+    opacity: 1;\
+}\
+.comment.past {\
+    opacity: 0;\
+}\
+.description {\
+    display: none;\
+    position: fixed;\
+    left: 0;\
+    right: 0;\
+    width: 50%;\
+    border-radius: 10px;\
+    background: rgba(0,0,0,0.5);\
+    color: #EEE;\
+    font-size: 20px;\
+    padding: 20px;\
+    z-index: 100;\
+}\
+.arrow-body-common {\
+    position: relative;\
+    background-color: black;\
+    float: left;\
+}\
+.arrow-body-horizontal {\
+    width: 90%;\
+    height: 10px;\
+    top: 14px;\
+}\
+.arrow-end {\
+    width: 0; \
+    height: 0; \
+    position: relative;\
+    left: -1px;\
+    float: left;\
+}\
+.arrow-right {\
+    border-bottom: 20px solid transparent;\
+    border-top: 20px solid transparent;\
+    border-left: 20px solid black;\
+}\
+' + "<style>")
 impress_arrows().init();
 impress().init();

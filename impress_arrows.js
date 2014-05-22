@@ -10,14 +10,20 @@ function impress_arrows()
         while(classes.indexOf('skip') != -1)
             return item;
     }
+    function get_coordinate(what, name)
+    {
+        var coordinate = what.attr('data-' + name);
+        if(coordinate == undefined) coordinate = '0';
+        return parseInt(coordinate);
+    }
     function get_coordinates(i)
     {
         next = do_skip($(i), function(a) { return a.next() });
         prev = do_skip($(i), function(a) { return a.prev() });
-        xb = parseInt(next.attr('data-x'));
-        xa = parseInt(prev.attr('data-x'));
-        yb = parseInt(next.attr('data-y'));
-        ya = parseInt(prev.attr('data-y'));
+        xb = get_coordinate(next, 'x');
+        xa = get_coordinate(prev, 'x');
+        yb = get_coordinate(next, 'y');
+        ya = get_coordinate(prev, 'y');
         dx = xb - xa;
         dy = yb - ya;
         l = Math.sqrt(dy * dy + dx * dx) * 0.4

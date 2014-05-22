@@ -898,5 +898,7 @@ return this;
 //
 // I've learnt a lot when building impress.js and I hope this code and comments
 // will help somebody learn at least some part of it.
+$("head").append("<link rel=stylesheet type=text/css"
+        + " href=impress_arrows.css/>")
 impress_arrows().init();
 impress().init();
